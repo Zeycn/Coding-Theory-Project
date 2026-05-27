@@ -33,3 +33,16 @@ for i in range(4):
 message = "ECC2026-S05E"
 bit_list = []
 word = ""
+
+for i in message:
+    num = ord(i)
+    eight_bits = [0, 0, 0, 0, 0, 0, 0, 0]
+    for j in range(7, -1, -1):
+        eight_bits[j] = num % 2
+        num = int(num / 2)
+    for bit in eight_bits:
+        bit_list.append(bit)
+        word = word + str(bit)
+print("ASCII to Binary:", word)
+print("Raw Bit Count:", len(bit_list))
+
