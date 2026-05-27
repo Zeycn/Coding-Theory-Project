@@ -29,3 +29,7 @@ for i in range(4):
         remainder = total % 2
         first_list.append(remainder)
     print(first_list)
+
+message = "ECC2026-S05E"
+bit_list = []
+word = ""
