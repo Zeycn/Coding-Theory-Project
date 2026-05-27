@@ -14,3 +14,18 @@ generator = [
     [0, 1, 0, 0, parity[1][0], parity[1][1], parity[1][2]],
     [0, 0, 1, 0, parity[2][0], parity[2][1], parity[2][2]],
     [0, 0, 0, 1, parity[3][0], parity[3][1], parity[3][2]] ]
+
+for i in range(4):
+    first_list = []
+    for j in range(3):
+        total = (
+                (generator[i][0] * H[j][0])
+                + (generator[i][1] * H[j][1])
+                + (generator[i][2] * H[j][2])
+                + (generator[i][3] * H[j][3])
+                + (generator[i][4] * H[j][4])
+                + (generator[i][5] * H[j][5])
+                + (generator[i][6] * H[j][6]))
+        remainder = total % 2
+        first_list.append(remainder)
+    print(first_list)
