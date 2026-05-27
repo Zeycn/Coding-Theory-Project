@@ -46,3 +46,13 @@ for i in message:
 print("ASCII to Binary:", word)
 print("Raw Bit Count:", len(bit_list))
 
+
+hamming_encoded_list = []
+for i in range(0, len(bit_list), 4):
+    block = bit_list[i: i + 4]
+    for col in range(7):
+        bit_sum = 0
+        for row in range(4):
+            bit_sum += block[row] * generator[row][col]
+        hamming_encoded_list.append(bit_sum % 2)
+print("Hamming Length:", len(hamming_encoded_list))
