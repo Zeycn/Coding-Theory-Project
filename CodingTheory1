@@ -149,3 +149,11 @@ for p in probs:
             decoded.append(block[1])
             decoded.append(block[2])
             decoded.append(block[3])
+
+        for i in range(len(bit_list)):
+            if bit_list[i] != decoded[i]:
+                total_errors = total_errors + 1
+    total_tested_bits = len(seeds) * len(bit_list)
+    final_ber = total_errors / total_tested_bits
+    
+    print("Prob:", p, "--> System BER:", final_ber)
