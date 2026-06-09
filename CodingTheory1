@@ -95,3 +95,32 @@ for p in probs:
         random.seed(s)
         received = [1 - bit if random.random() < p else bit for bit in encoded]
 
+        metrics = [9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999]
+        metrics[0] = 0
+        paths = [[], [], [], [], [], [], [], []]
+        
+        for i in range(0, len(received), 2):
+            bit1 = received[i]
+            bit2 = received[i+1]
+            new_metrics = [9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999]
+            new_paths = [[], [], [], [], [], [], [], []]
+
+            for state in range(8):
+                if metrics[state] == 9999:
+                    continue
+                for bit in [0, 1]:
+                    nxt = next_state[state][bit]
+                    exp = expected[state][bit]
+                    dist = 0
+
+                    if bit1 != exp[0]:
+                        dist = dist + 1
+                    if bit2 != exp[1]:
+                        dist = dist + 1
+                    cost = metrics[state] + dist
+                    if cost < new_metrics[nxt]:
+                        new_metrics[nxt] = cost
+                        new_paths[nxt] = paths[state] + [bit]
+            metrics = new_metrics
+            paths = new_paths
+        viterbi_out = paths[0][:-3]
