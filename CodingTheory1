@@ -124,3 +124,28 @@ for p in probs:
             metrics = new_metrics
             paths = new_paths
         viterbi_out = paths[0][:-3]
+
+        decoded = []
+        for i in range(0, len(viterbi_out), 7):
+            block = viterbi_out[i : i+7]
+            synd = [0, 0, 0]
+            for r in range(3):
+                bit_sum = 0
+                for c in range(7):
+                    bit_sum = bit_sum + (block[c] * H[r][c])
+                synd[r] = bit_sum % 2
+
+            if synd != [0, 0, 0]:
+                for c in range(7):
+                    column = [H[0][c], H[1][c], H[2][c]]
+                    if synd == column:
+                        if block[c] == 0:
+                            block[c] = 1
+                        else:
+                            block[c] = 0
+                        break
+
+            decoded.append(block[0])
+            decoded.append(block[1])
+            decoded.append(block[2])
+            decoded.append(block[3])
