@@ -86,5 +86,12 @@ print("Codeword Length:", len(encoded))
 sonraki = [[0,4], [0,4], [1,5], [1,5], [2,6], [2,6], [3,7], [3,7]]
 cikis = [[[0,0],[1,1]], [[1,1],[0,0]], [[0,1],[1,0]], [[1,0],[0,1]],
          [[1,1],[0,0]], [[0,0],[1,1]], [[1,0],[0,1]], [[0,1],[1,0]]]
+seeds = [7565, 12869, 20375]
+probs = [0.001, 0.01, 0.05, 0.1, 0.15]
 
+for p in probs:
+    total_errors = 0
+    for s in seeds:
+        random.seed(s)
+        received = [1 - bit if random.random() < p else bit for bit in encoded]
 
